@@ -15,17 +15,20 @@ function App() {
     }, [])
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <ul>
-                    {activities.map((activity: any) => (
-                        <li key={activity.id}>
-                            {activity.title}
-                        </li>
-                    ))}
-                </ul>
-            </header>
+        <div>   
+            <h4 className="ui header">
+                <i className="users icon"></i>
+                <div className="content">
+                    Reactivities
+                </div>
+            </h4>
+            <div className="ui list">
+                {activities.map((activity: any) => (
+                    <div className="item" key={activity.id}>
+                        {activity.title}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
