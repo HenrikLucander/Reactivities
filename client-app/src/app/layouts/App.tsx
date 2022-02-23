@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Activity } from '../models/activity';
 
 function App() {
-    const [activities, setActivities] = useState([])
+    const [activities, setActivities] = useState<Activity[]>([])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/activities')
+        axios.get<Activity[]>('http://localhost:5000/api/activities')
             .then(response => {
                 setActivities(response.data);
             })
@@ -20,7 +21,7 @@ function App() {
                 </div>
             </h4>
             <div className="ui list">
-                {activities.map((activity: any) => (
+                {activities.map(activity => (
                     <div className="item" key={activity.id}>
                         {activity.title}
                     </div>
