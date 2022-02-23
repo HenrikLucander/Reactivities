@@ -1,12 +1,16 @@
 ﻿using Domain;
 using MediatR;
 using Persistance;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Activities
 {
-    public class Create
+    public class Edit
     {
         public class Command : IRequest
         {
@@ -17,14 +21,16 @@ namespace Application.Activities
         {
             private readonly DataContext _context;
 
-            public Handler(DataContext _context)
+            public Handler(DataContext context)
             {
-                this._context = _context;
+                _context = context;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                _context.Activities.Add(request.Activity);
+                var activity = await _context.Activities.FindAsync(request.Activity.Id);
+
+                activity.Title = request.Activity.Title ?? activity.Title;
 
                 await _context.SaveChangesAsync();
 
