@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Activity } from '../models/activity';
+import NavBar from './navbar';
 
 function App() {
     const [activities, setActivities] = useState<Activity[]>([])
@@ -13,21 +14,18 @@ function App() {
     }, [])
 
     return (
-        <div>   
-            <h4 className="ui header">
-                <i className="users icon"></i>
-                <div className="content">
-                    Reactivities
+        <>
+            <NavBar />
+            <div className="ui container" style={{ marginTop: '2em' }}>
+                <div className="ui list">
+                    {activities.map(activity => (
+                        <div className="item" key={activity.id}>
+                            {activity.title}
+                        </div>
+                    ))}
                 </div>
-            </h4>
-            <div className="ui list">
-                {activities.map(activity => (
-                    <div className="item" key={activity.id}>
-                        {activity.title}
-                    </div>
-                ))}
             </div>
-        </div>
+        </>
     );
 }
 
