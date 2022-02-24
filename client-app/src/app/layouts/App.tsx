@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Activity } from '../models/activity';
 import NavBar from './navbar';
+import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 
 function App() {
     const [activities, setActivities] = useState<Activity[]>([])
@@ -17,13 +18,7 @@ function App() {
         <>
             <NavBar />
             <div className="ui container" style={{ marginTop: '2em' }}>
-                <div className="ui list">
-                    {activities.map(activity => (
-                        <div className="item" key={activity.id}>
-                            {activity.title}
-                        </div>
-                    ))}
-                </div>
+                <ActivityDashboard activities={activities} />
             </div>
         </>
     );
