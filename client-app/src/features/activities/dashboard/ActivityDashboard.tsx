@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 import { Activity } from '../../../app/models/activity';
+import ActivityDetails from '../details/ActivityDetails';
+import ActivityList from './ActivityList';
 
 interface Props {
     activities: Activity[];
@@ -7,13 +9,14 @@ interface Props {
 
 export default function ActivityDashboard({ activities }: Props) {
     return (
-        <div className="ui ten column doubling stackable grid container">
-            <div className="ui list">
-                {activities.map(activity => (
-                    <div className="column" key={activity.id}>
-                        {activity.title}
-                    </div>
-                ))}
+
+        <div className="ui grid">
+            <div className="ten wide column">
+                <ActivityList activities={activities} />
+            </div>
+            <div className="six wide column">
+                {activities[0] &&
+                    <ActivityDetails activity={activities[0]} />}
             </div>
         </div>
     )

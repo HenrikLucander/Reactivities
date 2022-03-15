@@ -12,7 +12,7 @@ export default function NavBar() {
                     Activities
                 </a>
                 <a className="item">
-                    <button className="ui button">
+                    <button className="ui blue button">
                         Create Activity
                     </button>
                 </a>
