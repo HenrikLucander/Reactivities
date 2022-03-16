@@ -1,6 +1,10 @@
 ﻿import React from 'react';
 
-export default function NavBar() {
+interface Props {
+    openForm: () => void;
+}
+
+export default function NavBar({openForm}: Props) {
     return (
         <div className="ui inverted attached stackable menu">
             <div className="ui container">
@@ -12,7 +16,7 @@ export default function NavBar() {
                     Activities
                 </a>
                 <a className="item">
-                    <button className="ui blue button">
+                    <button onClick={openForm} className="ui blue button">
                         Create Activity
                     </button>
                 </a>

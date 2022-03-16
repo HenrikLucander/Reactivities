@@ -1,6 +1,12 @@
 ﻿import React from 'react'
+import { Activity } from '../../../app/models/activity'
 
-export default function ActivityForm() {
+interface Props {
+    activity: Activity | undefined;
+    closeForm: () => void;
+}
+
+export default function ActivityForm({activity, closeForm}: Props) {
     return (
         <div className="ui segment clearing">
             <form className="ui form">
@@ -23,7 +29,7 @@ export default function ActivityForm() {
                     <input type="text" name="Venue" placeholder="Venue" />
                 </div>
                 <button className="ui button right floated positive" type="submit">Submit</button>
-                <button className="ui button right floated" type="button">Cancel</button>              
+                <button onClick={closeForm} className="ui button right floated" type="button">Cancel</button>              
             </form>
         </div>
         )

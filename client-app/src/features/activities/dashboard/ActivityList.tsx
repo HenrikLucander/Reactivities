@@ -3,9 +3,10 @@ import { Activity } from '../../../app/models/activity';
 
 interface Props {
     activities: Activity[];
+    selectActivity: (id: string) => void;
 }
 
-export default function ActivityList({ activities }: Props) {
+export default function ActivityList({ activities, selectActivity }: Props) {
     return (
         <div className="ui segment">
             <div className="ui divided items">
@@ -19,7 +20,7 @@ export default function ActivityList({ activities }: Props) {
                                 <div>{activity.city}, {activity.venue}</div>
                             </div>
                             <div className="extra">
-                                <button className="ui button right floated blue">View</button>
+                                <button onClick={() => selectActivity(activity.id)}  className="ui button right floated blue">View</button>
                                 <div className="ui basic label">
                                     {activity.category}
                                 </div>
