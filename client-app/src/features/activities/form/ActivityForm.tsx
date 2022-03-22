@@ -44,7 +44,7 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
                     <input type="text" placeholder="Category" name="category" value={activity.category} onChange={handleInputChange}/>
                 </div>
                 <div className="field">
-                    <input type="text" placeholder="Date" name="date" value={activity.date} onChange={handleInputChange}/>
+                    <input type="date" placeholder="Date" name="date" value={activity.date} onChange={handleInputChange}/>
                 </div>
                 <div className="field">
                     <input type="text" placeholder="City" name="city" value={activity.city} onChange={handleInputChange}/>

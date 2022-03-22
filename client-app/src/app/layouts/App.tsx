@@ -13,8 +13,12 @@ function App() {
 
     useEffect(() => {
         agent.Activities.list().then(response => {
-                setActivities(response);
+            response.map(function (item) {
+                item.date = item.date.split('T')[0];
+                return item
             })
+            setActivities(response);
+        })
     }, [])
 
     function handleSelectActivity(id: String) {
@@ -35,7 +39,7 @@ function App() {
     }
 
     function handleCreateOrEditActivity(activity: Activity) {
-        activity.id ? setActivities([...activities.filter(x => x.id !== activity.id), activity]) : setActivities([...activities, {...activity, id: uuid()}]);
+        activity.id ? setActivities([...activities.filter(x => x.id !== activity.id), activity]) : setActivities([...activities, { ...activity, id: uuid() }]);
         setEditMode(false);
         setSelectedActivity(activity);
     }
