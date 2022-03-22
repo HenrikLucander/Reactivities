@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import { Activity } from '../../../app/models/activity';
+﻿import { Activity } from '../../../app/models/activity';
 import ActivityDetails from '../details/ActivityDetails';
 import ActivityForm from '../form/ActivityForm';
 import ActivityList from './ActivityList';
@@ -12,10 +11,11 @@ interface Props {
     editMode: boolean;
     openForm: (id: string) => void;
     closeForm: () => void;
+    createOrEdit: (activity: Activity) => void;
 }
 
 export default function ActivityDashboard({ activities, selectedActivity,
-    selectActivity, cancelSelectActivity, editMode, openForm, closeForm }: Props) {
+    selectActivity, cancelSelectActivity, editMode, openForm, closeForm, createOrEdit }: Props) {
     return (
 
         <div className="ui grid">
@@ -30,7 +30,7 @@ export default function ActivityDashboard({ activities, selectedActivity,
                         openForm={openForm}
                     />}
                 {editMode &&
-                    <ActivityForm closeForm={closeForm} activity={selectedActivity} />}
+                    <ActivityForm closeForm={closeForm} activity={selectedActivity} createOrEdit={createOrEdit}/>}
             </div>
         </div>
     )
