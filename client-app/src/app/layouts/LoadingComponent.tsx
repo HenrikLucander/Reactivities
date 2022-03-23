@@ -1,5 +1,4 @@
-﻿
-interface Props {
+﻿interface Props {
     inverted?: boolean;
     content?: string;
 }

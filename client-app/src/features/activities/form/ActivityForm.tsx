@@ -5,9 +5,10 @@ interface Props {
     activity: Activity | undefined;
     closeForm: () => void;
     createOrEdit: (activity: Activity) => void;
+    submitting: boolean;
 }
 
-export default function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit }: Props) {
+export default function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit, submitting }: Props) {
 
     const initialState = selectedActivity ?? {
         id: '',
@@ -28,7 +29,7 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { name, value } = event.target;
-        setActivity({...activity, [name]: value})
+        setActivity({ ...activity, [name]: value })
     }
 
     return (
@@ -41,20 +42,22 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
                     <textarea placeholder="Description" rows={1} name="description" value={activity.description} onChange={handleInputChange}></textarea>
                 </div>
                 <div className="field">
-                    <input type="text" placeholder="Category" name="category" value={activity.category} onChange={handleInputChange}/>
+                    <input type="text" placeholder="Category" name="category" value={activity.category} onChange={handleInputChange} />
                 </div>
                 <div className="field">
-                    <input type="date" placeholder="Date" name="date" value={activity.date} onChange={handleInputChange}/>
+                    <input type="date" placeholder="Date" name="date" value={activity.date} onChange={handleInputChange} />
                 </div>
                 <div className="field">
-                    <input type="text" placeholder="City" name="city" value={activity.city} onChange={handleInputChange}/>
+                    <input type="text" placeholder="City" name="city" value={activity.city} onChange={handleInputChange} />
                 </div>
                 <div className="field">
-                    <input type="text" placeholder="Venue" name="venue" value={activity.venue} onChange={handleInputChange}/>
+                    <input type="text" placeholder="Venue" name="venue" value={activity.venue} onChange={handleInputChange} />
                 </div>
-                <button className="ui button right floated positive" type="submit">Submit</button>
-                <button onClick={closeForm} className="ui button right floated" type="button">Cancel</button>              
+                {submitting ? <button className="ui button right floated positive loading" type="submit">Submit</button>
+                    : <button className="ui button right floated positive" type="submit">Submit</button>
+                }
+                <button onClick={closeForm} className="ui button right floated" type="button">Cancel</button>
             </form>
         </div>
-        )
+    )
 }
