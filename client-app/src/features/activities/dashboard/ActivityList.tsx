@@ -1,13 +1,21 @@
-﻿import React from 'react';
+﻿import { SyntheticEvent, useState } from 'react';
 import { Activity } from '../../../app/models/activity';
 
 interface Props {
     activities: Activity[];
     selectActivity: (id: string) => void;
     deleteActivity: (id: string) => void;
+    submitting: boolean;
 }
 
-export default function ActivityList({ activities, selectActivity, deleteActivity }: Props) {
+export default function ActivityList({ activities, selectActivity, deleteActivity, submitting }: Props) {
+    const [target, setTarget] = useState('');
+
+    function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+        setTarget(e.currentTarget.name);
+        deleteActivity(id);
+    }
+
     return (
         <div className="ui segment">
             <div className="ui divided items">
@@ -22,7 +30,10 @@ export default function ActivityList({ activities, selectActivity, deleteActivit
                             </div>
                             <div className="extra">
                                 <button onClick={() => selectActivity(activity.id)} className="ui button right floated blue">View</button>
-                                <button onClick={() => deleteActivity(activity.id)} className="ui button right floated red">Delete</button>
+                                {submitting && target == activity.id ?
+                                    <button onClick={(e) => handleActivityDelete(e, activity.id)} className="ui button right floated red loading" name={activity.id}>Delete</button>
+                                    : <button onClick={(e) => handleActivityDelete(e, activity.id)} className="ui button right floated red" name={activity.id}>Delete</button>
+                                }
                                 <div className="ui basic label">
                                     {activity.category}
                                 </div>

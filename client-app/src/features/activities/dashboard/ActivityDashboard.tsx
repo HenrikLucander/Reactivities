@@ -22,7 +22,11 @@ export default function ActivityDashboard({ activities, selectedActivity,
 
         <div className="ui grid">
             <div className="ten wide column">
-                <ActivityList activities={activities} selectActivity={selectActivity} deleteActivity={deleteActivity} />
+                <ActivityList
+                    activities={activities}
+                    selectActivity={selectActivity}
+                    deleteActivity={deleteActivity}
+                    submitting={submitting} />
             </div>
             <div className="six wide column">
                 {selectedActivity && !editMode &&
